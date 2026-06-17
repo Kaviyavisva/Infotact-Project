@@ -121,3 +121,105 @@ class VectorStore:
         except Exception as e:
             logger.error(f"Failed to reset collection '{collection_name}': {e}")
             raise
+    def upsert_documents(
+        self,
+        ids: List[str],
+        documents: List[str],
+        embeddings: List[List[float]],
+        metadatas: Optional[List[Dict[str, Any]]] = None,
+        batch_size: int = 100
+    ) -> Dict[str, Any]:
+        """
+        Upserts documents, embeddings, and metadata into the vector store in batches.
+
+        This method validates the input data, ensures uniform lengths and embedding dimensions,
+        and safely upserts the data into ChromaDB. Existing IDs will be updated.
+
+        Args:
+            ids (List[str]): Unique identifiers for the documents.
+            documents (List[str]): The text content of the documents.
+            embeddings (List[List[float]]): The vector embeddings for the documents.
+            metadatas (Optional[List[Dict[str, Any]]]): Optional metadata dictionaries for each document.
+            batch_size (int): The number of documents to upsert per batch. Defaults to 100.
+
+        Returns:
+            Dict[str, Any]: Insertion statistics including attempted counts, success counts,
+                and status.
+
+        Raises:
+            ValueError: If input validation fails (e.g., mismatched lengths, empty lists).
+        """
+        logger.info(f"Starting upsert process for {len(ids)} documents.")
+
+        # 1. Validate Non-Empty
+        if not ids or not documents or not embeddings:
+            error_msg = "IDs, documents, and embeddings lists cannot be empty."
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+
+        # 2. Validate Equal Lengths
+        n_docs = len(ids)
+        if len(documents) != n_docs or len(embeddings) != n_docs:
+            error_msg = f"Mismatched lengths: {len(ids)} ids, {len(documents)} docs, {len(embeddings)} embeddings."
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+
+        if metadatas is not None and len(metadatas) != n_docs:
+            error_msg = f"Mismatched lengths: {len(ids)} ids, {len(metadatas)} metadatas."
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+
+        # 3. Validate Embedding Dimensions
+        expected_dim = len(embeddings[0])
+        for i, emb in enumerate(embeddings):
+            if len(emb) != expected_dim:
+                error_msg = f"Inconsistent embedding dimension at index {i}. Expected {expected_dim}, got {len(emb)}."
+                logger.error(error_msg)
+                raise ValueError(error_msg)
+
+        # 4. Validate Metadata Format
+        if metadatas is not None:
+            for i, meta in enumerate(metadatas):
+                if not isinstance(meta, dict):
+                    error_msg = f"Invalid metadata format at index {i}. Expected dict, got {type(meta)}."
+                    logger.error(error_msg)
+                    raise ValueError(error_msg)
+
+        # Prepare statistics
+        stats = {
+            "total_attempted": n_docs,
+            "total_upserted": 0,
+            "batches_processed": 0,
+            "status": "success",
+            "error": None
+        }
+
+        # 5. Batch Upsertion
+        try:
+            for i in range(0, n_docs, batch_size):
+                batch_ids = ids[i:i + batch_size]
+                batch_docs = documents[i:i + batch_size]
+                batch_embs = embeddings[i:i + batch_size]
+                batch_metas = metadatas[i:i + batch_size] if metadatas is not None else None
+
+                # .upsert() inherently creates new records or updates existing IDs
+                self.collection.upsert(
+                    ids=batch_ids,
+                    documents=batch_docs,
+                    embeddings=batch_embs,
+                    metadatas=batch_metas
+                )
+
+                stats["total_upserted"] += len(batch_ids)
+                stats["batches_processed"] += 1
+                logger.info(f"Successfully upserted batch {stats['batches_processed']} ({len(batch_ids)} documents).")
+
+            logger.success(f"Upsert complete. {stats['total_upserted']}/{stats['total_attempted']} documents inserted.")
+
+        except Exception as e:
+            error_msg = f"Failed during batch upsertion at batch {stats['batches_processed'] + 1}: {str(e)}"
+            logger.error(error_msg)
+            stats["status"] = "partial_success" if stats["total_upserted"] > 0 else "failure"
+            stats["error"] = error_msg
+
+        return stats

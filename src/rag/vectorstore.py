@@ -223,3 +223,74 @@ class VectorStore:
             stats["error"] = error_msg
 
         return stats
+    def search(
+        self,
+        query_embedding: List[float],
+        top_k: int = 3
+    ) -> Dict[str, List[Any]]:
+        """
+        Performs a similarity search using a single query embedding.
+
+        Retrieves the nearest neighbors from the vector store based on the 
+        provided embedding. Optimizes retrieval by specifying required include fields
+        and gracefully handles empty collections.
+
+        Args:
+            query_embedding (List[float]): The vector embedding to search for.
+            top_k (int): The maximum number of relevant documents to retrieve. Defaults to 3.
+
+        Returns:
+            Dict[str, List[Any]]: A dictionary containing the flat lists of retrieved data:
+                - "ids" (List[str]): Document IDs.
+                - "documents" (List[str]): Document text content.
+                - "metadatas" (List[Dict[str, Any]]): Metadata dictionaries.
+                - "distances" (List[float]): Distance scores indicating similarity.
+
+        Raises:
+            ValueError: If top_k is less than 1 or if query_embedding is empty.
+            Exception: If the underlying search operation fails unexpectedly.
+        """
+        logger.info(f"Executing search query for top_k={top_k}")
+
+        if not query_embedding:
+            error_msg = "Query embedding cannot be empty."
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+
+        if top_k < 1:
+            error_msg = f"Invalid top_k parameter: {top_k}. Must be greater than 0."
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+
+        try:
+            # Handle empty collection gracefully
+            if self.collection.count() == 0:
+                logger.warning("Search requested on an empty collection. Returning empty results.")
+                return {
+                    "ids": [],
+                    "documents": [],
+                    "metadatas": [],
+                    "distances": []
+                }
+
+            # Perform similarity search
+            # `include` optimizes payload by fetching only what's required (Chroma returns ids by default)
+            results = self.collection.query(
+                query_embeddings=[query_embedding],
+                n_results=top_k,
+                include=["documents", "metadatas", "distances"]
+            )
+
+            logger.info("Search operation completed successfully.")
+
+            # Flatten the single query result structure
+            return {
+                "ids": results.get("ids", [[]])[0],
+                "documents": results.get("documents", [[]])[0] if results.get("documents") else [],
+                "metadatas": results.get("metadatas", [[]])[0] if results.get("metadatas") else [],
+                "distances": results.get("distances", [[]])[0] if results.get("distances") else []
+            }
+
+        except Exception as e:
+            logger.error(f"Search operation failed: {e}")
+            raise

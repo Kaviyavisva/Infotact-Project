@@ -2,7 +2,7 @@
 Vector Store module for managing Generative AI RAG operations.
 """
 
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from loguru import logger
 from chromadb.api.models.Collection import Collection
 
@@ -121,6 +121,7 @@ class VectorStore:
         except Exception as e:
             logger.error(f"Failed to reset collection '{collection_name}': {e}")
             raise
+
     def upsert_documents(
         self,
         ids: List[str],
@@ -202,7 +203,6 @@ class VectorStore:
                 batch_embs = embeddings[i:i + batch_size]
                 batch_metas = metadatas[i:i + batch_size] if metadatas is not None else None
 
-                # .upsert() inherently creates new records or updates existing IDs
                 self.collection.upsert(
                     ids=batch_ids,
                     documents=batch_docs,
@@ -223,6 +223,7 @@ class VectorStore:
             stats["error"] = error_msg
 
         return stats
+
     def search(
         self,
         query_embedding: List[float],

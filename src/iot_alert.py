@@ -1,49 +1,60 @@
 import json
 
-# Read chunks generated in Week 1
-with open("output/chunks.json", "r", encoding="utf-8") as f:
-    chunks = json.load(f)
 
-# Error keywords to look for
-keywords = [
-    "REFRIGERANT",
-    "LEAK",
-    "ELECTRIC SHOCK",
-    "FIRE",
-    "OVERHEATING",
-    "SHORT CIRCUIT",
-    "BURST",
-    "BURN",
-    "INJURY"
-]
+class IoTAlertHandler:
+    def __init__(self):
+        self.keywords = [
+            "REFRIGERANT",
+            "LEAK",
+            "ELECTRIC SHOCK",
+            "FIRE",
+            "OVERHEATING",
+            "SHORT CIRCUIT",
+            "BURST",
+            "BURN",
+            "INJURY"
+        ]
 
-alerts = []
+    def generate_alerts(self):
+        """
+        Reads chunks and generates IoT alerts.
+        Returns a list of alerts.
+        """
 
-# Process chunks
-for i, chunk in enumerate(chunks):
-    machine_id = f"HVAC_{i+1:03}"
+        with open("output/chunks.json", "r", encoding="utf-8") as f:
+            chunks = json.load(f)
 
-    found = False
+        alerts = []
 
-    for keyword in keywords:
-        if keyword.lower() in chunk.lower():
-            error_code = keyword.replace(" ", "_")
+        for i, chunk in enumerate(chunks):
+            machine_id = f"HVAC_{i+1:03}"
 
-            # Create search query automatically
-            query = f"How to fix {error_code} in machine {machine_id}?"
+            for keyword in self.keywords:
+                if keyword.lower() in chunk.lower():
 
-            alerts.append({
-                "machine_id": machine_id,
-                "error_code": error_code,
-                "search_query": query
-            })
+                    error_code = keyword.replace(" ", "_")
 
-            found = True
-            break
+                    query = f"How to fix {error_code} in machine {machine_id}?"
 
-# Print alerts
-for alert in alerts:
-    print("Machine ID :", alert["machine_id"])
-    print("Error Code :", alert["error_code"])
-    print("Search Query :", alert["search_query"])
-    print("-" * 50)
+                    alerts.append({
+                        "machine_id": machine_id,
+                        "error_code": error_code,
+                        "search_query": query
+                    })
+
+                    break
+
+        return alerts
+
+
+if __name__ == "__main__":
+
+    handler = IoTAlertHandler()
+
+    alerts = handler.generate_alerts()
+
+    for alert in alerts:
+        print("Machine ID :", alert["machine_id"])
+        print("Error Code :", alert["error_code"])
+        print("Search Query :", alert["search_query"])
+        print("-" * 50)

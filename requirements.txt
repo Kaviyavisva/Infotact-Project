@@ -1,2 +1,6 @@
 pymupdf
 python-dotenv
+langchain
+langgraph
+chromadb
+sentence-transformers

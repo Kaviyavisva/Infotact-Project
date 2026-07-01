@@ -1,0 +1,250 @@
+[
+    {
+        "machine_id": "HVAC_001",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Vibration Sensor",
+        "sensor_value": "19 mm/s",
+        "error_code": "ABNORMAL_VIBRATION",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_001",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Current Sensor",
+        "sensor_value": "15 A",
+        "error_code": "ELECTRICAL_OVERLOAD",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_002",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Smoke Sensor",
+        "sensor_value": "2 ppm",
+        "error_code": "FIRE_DETECTED",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_002",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Temperature Sensor",
+        "sensor_value": "88 \u00b0C",
+        "error_code": "OVERHEATING",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_003",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Pressure Sensor",
+        "sensor_value": "27 psi",
+        "error_code": "REFRIGERANT_LEAK",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_003",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Smoke Sensor",
+        "sensor_value": "6 ppm",
+        "error_code": "FIRE_DETECTED",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_005",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Smoke Sensor",
+        "sensor_value": "7 ppm",
+        "error_code": "FIRE_DETECTED",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_005",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Current Sensor",
+        "sensor_value": "26 A",
+        "error_code": "ELECTRICAL_OVERLOAD",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_006",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Voltage Sensor",
+        "sensor_value": "223 V",
+        "error_code": "SHORT_CIRCUIT",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_007",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Pressure Sensor",
+        "sensor_value": "32 psi",
+        "error_code": "REFRIGERANT_LEAK",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_007",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Vibration Sensor",
+        "sensor_value": "30 mm/s",
+        "error_code": "ABNORMAL_VIBRATION",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_008",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Smoke Sensor",
+        "sensor_value": "2 ppm",
+        "error_code": "FIRE_DETECTED",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_009",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Voltage Sensor",
+        "sensor_value": "255 V",
+        "error_code": "SHORT_CIRCUIT",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_011",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Vibration Sensor",
+        "sensor_value": "38 mm/s",
+        "error_code": "ABNORMAL_VIBRATION",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_012",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Pressure Sensor",
+        "sensor_value": "24 psi",
+        "error_code": "REFRIGERANT_LEAK",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_013",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Voltage Sensor",
+        "sensor_value": "226 V",
+        "error_code": "SHORT_CIRCUIT",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_013",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Current Sensor",
+        "sensor_value": "15 A",
+        "error_code": "ELECTRICAL_OVERLOAD",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_014",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Pressure Sensor",
+        "sensor_value": "32 psi",
+        "error_code": "REFRIGERANT_LEAK",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_014",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Current Sensor",
+        "sensor_value": "20 A",
+        "error_code": "ELECTRICAL_OVERLOAD",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_015",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Pressure Sensor",
+        "sensor_value": "27 psi",
+        "error_code": "REFRIGERANT_LEAK",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_017",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Temperature Sensor",
+        "sensor_value": "100 \u00b0C",
+        "error_code": "OVERHEATING",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_017",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Smoke Sensor",
+        "sensor_value": "3 ppm",
+        "error_code": "FIRE_DETECTED",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_018",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Smoke Sensor",
+        "sensor_value": "4 ppm",
+        "error_code": "FIRE_DETECTED",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_021",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Pressure Sensor",
+        "sensor_value": "30 psi",
+        "error_code": "REFRIGERANT_LEAK",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_021",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Vibration Sensor",
+        "sensor_value": "18 mm/s",
+        "error_code": "ABNORMAL_VIBRATION",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_022",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Voltage Sensor",
+        "sensor_value": "191 V",
+        "error_code": "SHORT_CIRCUIT",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_022",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Vibration Sensor",
+        "sensor_value": "39 mm/s",
+        "error_code": "ABNORMAL_VIBRATION",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_024",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Smoke Sensor",
+        "sensor_value": "10 ppm",
+        "error_code": "FIRE_DETECTED",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_024",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Voltage Sensor",
+        "sensor_value": "243 V",
+        "error_code": "SHORT_CIRCUIT",
+        "severity": "HIGH"
+    },
+    {
+        "machine_id": "HVAC_025",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Pressure Sensor",
+        "sensor_value": "35 psi",
+        "error_code": "REFRIGERANT_LEAK",
+        "severity": "MEDIUM"
+    },
+    {
+        "machine_id": "HVAC_025",
+        "timestamp": "2026-06-27 09:31:03",
+        "sensor": "Temperature Sensor",
+        "sensor_value": "88 \u00b0C",
+        "error_code": "OVERHEATING",
+        "severity": "HIGH"
+    }
+]

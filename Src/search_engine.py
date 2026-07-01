@@ -8,8 +8,7 @@ model = SentenceTransformer("all-MiniLM-L6-v2")
 client = chromadb.PersistentClient(path="./chroma_db")
 
 # Open collection
-collection = client.get_collection("manual_chunks")
-
+collection = client.get_collection("maintenance_docs")
 def search_query(query):
 
     # Handle empty query

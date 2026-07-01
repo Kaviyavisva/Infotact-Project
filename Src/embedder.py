@@ -9,7 +9,7 @@ with open("chunks.json", "r", encoding="utf-8") as f:
     chunks = json.load(f)
 
 # Extract text
-texts = [chunk["text"] for chunk in chunks]
+texts = chunks
 
 # Generate embeddings
 embeddings = model.encode(texts)

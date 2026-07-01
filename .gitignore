@@ -1,3 +1,9 @@
 venv/
-__pycache__/
+chroma_db/
+chroma_db_test/
+chunks.json
+embeddings.json
+Output/
 *.pyc
+__pycache__/
+docs/week4_workflow_diagram
